@@ -1,4 +1,4 @@
-51149570607742
+56275732422775
 easyeda2kicad
 C0402
 
@@ -43,6 +43,13 @@ CONN-TH_2P-P3.81_KF124-3.81-2P
 2
 easyeda2kicad
 CONN-TH_4P-P3.81_DB2ERC-3.81-4P
+
+
+0
+4
+4
+easyeda2kicad
+CONN-TH_4P-P3.81_KF124-3.81-4P
 
 
 0
@@ -97,6 +104,13 @@ DIP-8_7P-L9.7-W6.4-P2.54-LS7.6-BL-PE7
 0
 7
 7
+easyeda2kicad
+DIP-8_L9.4-W6.4-P2.54-LS9.1-BL
+
+
+0
+8
+8
 easyeda2kicad
 HDR-TH_2P-P1.27-V-M
 
@@ -153,6 +167,13 @@ RES-ARRAY-SMD_0603-8P-L3.2-W1.6-BL
 0
 8
 8
+easyeda2kicad
+RES-TH_BD6.5-L17.5-P21.50-D0.6
+
+
+0
+2
+2
 easyeda2kicad
 RES-TH_L12.5-W6.2-P7.50-D0.9-S6.20
 
