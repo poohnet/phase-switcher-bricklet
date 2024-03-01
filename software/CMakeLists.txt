@@ -19,36 +19,40 @@ SET(CMAKE_BUILD_TYPE None)
 ENABLE_LANGUAGE(C ASM)
 
 INCLUDE_DIRECTORIES(
-	"${PROJECT_SOURCE_DIR}/src/"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/inc/"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/CMSIS/Include/"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/CMSIS/Infineon/XMC1300_series/Include/"
+  "${PROJECT_SOURCE_DIR}/src/"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/inc/"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/CMSIS/Include/"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/CMSIS/Infineon/XMC1300_series/Include/"
 )
 
 # find source files
 SET(SOURCES
-	"${PROJECT_SOURCE_DIR}/src/main.c"
-	"${PROJECT_SOURCE_DIR}/src/communication.c"
+  "${PROJECT_SOURCE_DIR}/src/main.c"
+  "${PROJECT_SOURCE_DIR}/src/communication.c"
+  "${PROJECT_SOURCE_DIR}/src/ac_in.c"
+  "${PROJECT_SOURCE_DIR}/src/ac_relay.c"
+  "${PROJECT_SOURCE_DIR}/src/dc_relay.c"
 
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/hal/uartbb/uartbb.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/hal/system_timer/system_timer.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/hal/startup/startup_xmc1.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/hal/startup/startup_xmc1300.S"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/hal/uartbb/uartbb.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/hal/system_timer/system_timer.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/hal/startup/startup_xmc1.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/hal/startup/startup_xmc1300.S"
 
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/bootloader/bootloader.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/bootloader/bootloader_xmc_irq.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/protocols/tfp/tfp.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/logging/logging.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/utility/ringbuffer.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/utility/pearson_hash.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/utility/communication_callback.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/utility/led_flicker.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_gpio.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_gpio.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_spi.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_usic.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_scu.c"
-	"${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_flash.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/bootloader/bootloader.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/bootloader/bootloader_xmc_irq.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/protocols/tfp/tfp.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/logging/logging.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/utility/ringbuffer.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/utility/pearson_hash.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/utility/communication_callback.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/utility/led_flicker.c"
+
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_gpio.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_gpio.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_spi.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc_usic.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_scu.c"
+  "${PROJECT_SOURCE_DIR}/src/bricklib2/xmclib/XMCLib/src/xmc1_flash.c"
 )
 
 MESSAGE(STATUS "\nFound following source files:\n ${SOURCES}\n")

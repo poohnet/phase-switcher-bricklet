@@ -1,7 +1,7 @@
 /* phase-switcher-bricklet
  * Copyright (C) 2024 Thomas Hein <github@poohnet.de>
  *
- * main.c: Initialization for Phase Switcher Bricklet
+ * dc_relay.h: DC Relay driver
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,31 +19,24 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
+#pragma once
+
+#include <stdint.h>
 #include <stdbool.h>
 
-#include "configs/config.h"
+#include "bricklib2/utility/led_flicker.h"
 
-#include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
-#include "communication.h"
+#define DC_RELAY_PIN P0_0
+#define DC_RELAY_LED_PIN P0_12
 
-#include "ac_in.h"
-#include "ac_relay.h"
-#include "dc_relay.h"
+typedef struct {
+  LEDFlickerState led_flicker_state;
+} DCRelay;
 
-int main(void)
-{
-  ac_in_init();
-  ac_relay_init();
-  dc_relay_init();
-  communication_init();
+extern DCRelay dc_relay;
 
-  while (true) {
-    bootloader_tick();
-    communication_tick();
-    ac_in_tick();
-    ac_relay_tick();
-    dc_relay_tick();
-  }
-}
+bool dc_relay_get_value();
+void dc_relay_set_value(bool value);
+
+void dc_relay_init();
+void dc_relay_tick();

@@ -1,7 +1,7 @@
 /* phase-switcher-bricklet
  * Copyright (C) 2024 Thomas Hein <github@poohnet.de>
  *
- * main.c: Initialization for Phase Switcher Bricklet
+ * ac_in.h: Driver for AC input and LEDs 
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,31 +19,35 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
+#pragma once
+
+#include <stdint.h>
 #include <stdbool.h>
 
-#include "configs/config.h"
+#include "bricklib2/utility/led_flicker.h"
 
-#include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
-#include "communication.h"
+#define AC_IN_CHANNEL_NUM 2
 
-#include "ac_in.h"
-#include "ac_relay.h"
-#include "dc_relay.h"
+#define AC_IN_CH0_PIN P2_2
+#define AC_IN_CH1_PIN P2_9
+#define AC_IN_LED_CH0_PIN P0_8
+#define AC_IN_LED_CH1_PIN P0_9
 
-int main(void)
-{
-  ac_in_init();
-  ac_relay_init();
-  dc_relay_init();
-  communication_init();
+typedef struct {
+  bool value;
+  bool last_value;
+  uint32_t last_change;
 
-  while (true) {
-    bootloader_tick();
-    communication_tick();
-    ac_in_tick();
-    ac_relay_tick();
-    dc_relay_tick();
-  }
-}
+  LEDFlickerState led_flicker_state;
+} ACIn;
+
+typedef struct {
+  XMC_GPIO_PORT_t* port;
+  const uint8_t pin;
+} ACInLED;
+
+extern ACIn ac_in[AC_IN_CHANNEL_NUM];
+extern ACInLED ac_in_led[AC_IN_CHANNEL_NUM];
+
+void ac_in_init();
+void ac_in_tick();

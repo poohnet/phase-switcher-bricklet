@@ -1,7 +1,7 @@
 /* phase-switcher-bricklet
  * Copyright (C) 2024 Thomas Hein <github@poohnet.de>
  *
- * main.c: Initialization for Phase Switcher Bricklet
+ * ac_relay.h: AC Relay driver
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,31 +19,34 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
+#pragma once
+
+#include <stdint.h>
 #include <stdbool.h>
 
-#include "configs/config.h"
+#include "bricklib2/utility/led_flicker.h"
 
-#include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
-#include "communication.h"
+#define AC_RELAY_CHANNEL_NUM 2
 
-#include "ac_in.h"
-#include "ac_relay.h"
-#include "dc_relay.h"
+#define AC_RELAY_CH0_PIN P1_0
+#define AC_RELAY_CH1_PIN P1_1
+#define AC_RELAY_CH0_LED_PIN P0_6
+#define AC_RELAY_CH1_LED_PIN P0_7
 
-int main(void)
-{
-  ac_in_init();
-  ac_relay_init();
-  dc_relay_init();
-  communication_init();
+typedef struct {
+  LEDFlickerState led_flicker_state;
+} ACRelay;
 
-  while (true) {
-    bootloader_tick();
-    communication_tick();
-    ac_in_tick();
-    ac_relay_tick();
-    dc_relay_tick();
-  }
-}
+typedef struct {
+  XMC_GPIO_PORT_t* port;
+  const uint8_t pin;
+} ACRelayLED;
+
+extern ACRelay ac_relay[AC_RELAY_CHANNEL_NUM];
+extern ACRelayLED ac_relay_led[AC_RELAY_CHANNEL_NUM];
+
+bool ac_relay_get_value(uint8_t channel);
+void ac_relay_set_value(uint8_t channel, bool value);
+
+void ac_relay_init();
+void ac_relay_tick();
