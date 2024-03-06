@@ -60,50 +60,36 @@ void communication_init(void);
 
 // Function and callback IDs and structs
 #define FID_SET_CONTROL_PILOT_DISCONNECT 1
-#define FID_GET_CONTROL_PILOT_DISCONNECT 2
-#define FID_SET_PHASES 3
-#define FID_GET_PHASES 4
+#define FID_SET_PHASES_WANTED 2
+#define FID_GET_ALL_DATA 3
 
 
 typedef struct {
-  TFPMessageHeader header;
-  bool control_pilot_disconnect;
+	TFPMessageHeader header;
+	bool control_pilot_disconnect;
 } __attribute__((__packed__)) SetControlPilotDisconnect;
 
 typedef struct {
-  TFPMessageHeader header;
-  bool is_control_pilot_disconnect;
-} __attribute__((__packed__)) SetControlPilotDisconnect_Response;
+	TFPMessageHeader header;
+	uint8_t phases_wanted;
+} __attribute__((__packed__)) SetPhasesWanted;
 
 typedef struct {
-  TFPMessageHeader header;
-} __attribute__((__packed__)) GetControlPilotDisconnect;
+	TFPMessageHeader header;
+} __attribute__((__packed__)) GetAllData;
 
 typedef struct {
-  TFPMessageHeader header;
-  bool control_pilot_disconnect;
-} __attribute__((__packed__)) GetControlPilotDisconnect_Response;
-
-typedef struct {
-  TFPMessageHeader header;
-  uint8_t phases;
-} __attribute__((__packed__)) SetPhases;
-
-typedef struct {
-  TFPMessageHeader header;
-} __attribute__((__packed__)) GetPhases;
-
-typedef struct {
-  TFPMessageHeader header;
-  uint8_t phases;
-} __attribute__((__packed__)) GetPhases_Response;
+	TFPMessageHeader header;
+	bool is_control_pilot_disconnected;
+	uint8_t phases_wanted;
+	uint8_t phases_active;
+} __attribute__((__packed__)) GetAllData_Response;
 
 
 // Function prototypes
-BootloaderHandleMessageResponse set_control_pilot_disconnect(const SetControlPilotDisconnect *data, SetControlPilotDisconnect_Response *response);
-BootloaderHandleMessageResponse get_control_pilot_disconnect(const GetControlPilotDisconnect *data, GetControlPilotDisconnect_Response *response);
-BootloaderHandleMessageResponse set_phases(const SetPhases *data);
-BootloaderHandleMessageResponse get_phases(const GetPhases *data, GetPhases_Response *response);
+BootloaderHandleMessageResponse set_control_pilot_disconnect(const SetControlPilotDisconnect *data);
+BootloaderHandleMessageResponse set_phases_wanted(const SetPhasesWanted *data);
+BootloaderHandleMessageResponse get_all_data(const GetAllData *data, GetAllData_Response *response);
 
 // Callbacks
 
